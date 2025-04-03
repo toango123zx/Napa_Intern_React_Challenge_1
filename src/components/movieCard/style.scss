@@ -1,0 +1,107 @@
+@use '../../scss/base/mixins' as mixin;
+@use '../../scss/base/variables' as var;
+
+.movie-card {
+    width: 100%;
+    border-radius: 4px;
+
+    &__background {
+        &--black {
+            background-color: var.$black;
+        }
+    }
+
+    &__poster {
+        display: flex;
+
+        button {
+            width: 100%;
+            height: 100%;
+            position: relative;
+
+            &:hover {
+                img {
+                    transform: scale(1.1);
+                    transition: all .5s ease-in-out;
+                }
+
+                .movie-card__coating {
+                    background-color: rgba(255, 255, 255, 0.1);
+                    transition: all 0.5s ease-in-out;
+                    z-index: 1;
+                }
+            }
+
+            div {
+                display: block;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 400px;
+
+        }
+
+        h2 {
+            width: 100%;
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            padding: 16px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+            text-align: left;
+            font-family: "Roboto", sans-serif;
+        }
+    }
+
+    &__coating {
+        position: absolute;
+    }
+
+    &__container {
+        width: 100%;
+        padding: 8px;
+
+        @include mixin.flex-layout(var.$flex-row, var.$flex-space-between, var.$flex-center, 0);
+
+        button {
+            background-color: transparent;
+            padding: 12px;
+            display: flex;
+
+            &:hover {
+                background-color: var.$gray-white;
+                border-radius: 100%;
+            }
+        }
+    }
+
+    &__content {
+        margin-bottom: 5.6px;
+        @include mixin.flex-layout(var.$flex-row, var.$flex-start, var.$flex-center, 5.3px);
+
+        p {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+    }
+
+    &__icon {
+        &--calender {
+            width: 20px;
+            height: 20px;
+        }
+
+        &--heart {
+            width: 24px;
+            height: 24px;
+        }
+    }
+}

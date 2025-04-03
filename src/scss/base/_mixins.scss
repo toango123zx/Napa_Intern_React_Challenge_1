@@ -1,0 +1,43 @@
+@use "./variables" as var;
+
+@mixin media-query($property, $sm, $md: null) {
+    #{$property}: $sm;
+
+    @if $breakpoint-md !=null {
+        @media (min-width: var.$breakpoint-md) {
+            #{$property}: $md;
+        }
+    }
+
+}
+
+@mixin respond-to($breakpoint) {
+    @if $breakpoint ==md {
+        @media (min-width: var.$breakpoint-md) {
+            @content;
+        }
+    }
+}
+
+@mixin respond-custom($breakpoint) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin button-format($bg-color, $radius, $color, $font-size, $font-weight, $line-height) {
+    --background-color: #{$bg-color};
+    --border-radius: #{$radius};
+    --font-size: #{$font-size};
+    --font-weight: #{$font-weight};
+    --color: #{$color};
+    --line-height: #{$line-height};
+}
+
+@mixin flex-layout($direction: var.$flex, $justify: var.$flex-center, $align: var.$flex-center, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}

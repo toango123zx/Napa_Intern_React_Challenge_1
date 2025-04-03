@@ -1,0 +1,157 @@
+@use '../../scss/base/mixins' as mixin;
+@use '../../scss/base/variables' as var;
+
+.detail {
+    @include mixin.flex-layout(var.$flex-column, var.$flex-center, var.$flex-center, 0);
+    padding-top: 32px;
+
+    &__container {
+        width: 100%;
+        @include mixin.flex-layout(var.$flex-column, var.$flex-center, var.$flex-center, 0);
+
+
+        @include mixin.respond-to(md) {
+            width: calc(5 / 6 * 100%);
+            @include mixin.flex-layout(var.$flex-row, var.$flex-start, var.$flex-start, 32px);
+        }
+    }
+
+    &__background {
+        &--gray {
+            height: 100%;
+            background-color: var.$gray-background;
+
+            @include mixin.respond-custom(1200px) {
+                height: 100vh;
+            }
+        }
+    }
+
+    &__img {
+        width: 100%;
+
+        @include mixin.respond-to(md) {
+            max-width: calc(1 / 3 * 100%);
+            overflow: clip;
+        }
+    }
+
+
+    img {
+        width: 100%;
+        height: 600px;
+        object-fit: fill;
+    }
+
+    &__content {
+        padding: 0 16px;
+        @include mixin.flex-layout(var.$flex-column, var.$flex-start, var.$flex-start, 16px);
+
+        @include mixin.respond-to(md) {
+            padding: 0 32px;
+        }
+
+    }
+
+    &__title {
+        width: 100%;
+        @include mixin.flex-layout(var.$flex-row, var.$flex-space-between, var.$flex-center, 0);
+
+        p {
+            font-size: 2rem;
+            padding-right: .5rem;
+            color: var.$white;
+            font-weight: 200;
+
+            @include mixin.respond-to(md) {
+                text-align: left;
+            }
+        }
+    }
+
+    &__rating {
+        @include mixin.flex-layout(var.$flex-row, var.$flex-start, var.$flex-center, 0);
+
+        p {
+            font-size: 0.8rem;
+            padding: 0;
+        }
+
+        i {
+            font-size: 0.7rem;
+            opacity: 0.5;
+        }
+
+    }
+
+    &__number-rating {
+        color: var.$yellow;
+        font-size: 1.5rem;
+        opacity: 1;
+    }
+
+    &__icon {
+        &--star {
+            width: 35px;
+            height: 35px;
+            color: var.$yellow;
+        }
+    }
+
+    &__release {
+        width: 100%;
+        @include mixin.flex-layout(var.$flex-row, var.$flex-start, var.$flex-center, 0);
+
+        p {
+            padding: 0 16px;
+            color: hsla(0, 0%, 100%, 0.5);
+            border-right: 2px solid hsla(0, 0%, 100%, 0.5);
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &:last-child {
+                border: none;
+            }
+        }
+    }
+
+    &__plot {
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+    }
+
+    &__information {
+        width: 100%;
+        padding: 16px 0;
+        border-top: 2px solid hsla(0, 0%, 100%, 0.5);
+
+        @include mixin.flex-layout(var.$flex-column, var.$flex-center, var.$flex-start, 16px);
+    }
+}
+
+.box {
+    &__content {
+        width: 100%;
+        @include mixin.flex-layout(var.$flex-row, var.$flex-start, var.$flex-center, 0);
+
+        h3 {
+            max-width: 25%;
+            flex-basis: 25%;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        ;
+
+        p {
+            max-width: 75%;
+            flex-basis: 75%;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            opacity: 0.7;
+        }
+    }
+}

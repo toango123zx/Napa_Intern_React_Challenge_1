@@ -1,0 +1,1 @@
+export const DOMAIN = String(import.meta.env.VITE_DOMAIN_BACKEND) || ''
