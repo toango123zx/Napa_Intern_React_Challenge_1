@@ -1,26 +1,37 @@
 import './style.scss'
 import { Header } from '../../components/header'
 import { IoMdSearch } from "react-icons/io";
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TMovie } from '../../types';
 import { MovieCard } from '../../components';
 import axios from 'axios';
 import { DOMAIN } from '../../constants';
-import { getLisMovie } from '../../apis/movie.api';
+import { getLisMovie, getMoviesByTitle } from '../../apis/movie.api';
 
 export const Home = () => {
   const [movies, setMovies] = useState<TMovie[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const searchTitle = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-
     const fetchMovies = async () => {
       const movies = await getLisMovie(1)
-      console.log(`🚀 ~ Home.tsx:28 ~ fetchMovies ~ response:`, movies)
       setMovies(movies);
     }
 
     fetchMovies();
+    setIsLoading(true);
   }, [])
+
+  const handlerSearchClick = async (title: string) => {
+    const featchMovies = async () => {
+      const movies = await getMoviesByTitle(title)
+      setMovies(movies)
+      searchTitle.current!.value = ''
+    }
+
+    featchMovies();
+  }
 
   return (
     <div className='home'>
@@ -30,15 +41,15 @@ export const Home = () => {
           <div className='home__search--wrap'>
             <div className='home__search'>
               <div>
-                <input type="text" placeholder='Search for movie' />
+                <input ref={searchTitle} type="text" placeholder='Search for movie' />
               </div>
-              <button><span><IoMdSearch className='home__icon--search' /></span></button>
+              <button><span><IoMdSearch onClick={() => handlerSearchClick(String(searchTitle.current?.value))} className='home__icon--search' /></span></button>
             </div>
           </div>
           <div className='home__content'>
             {
               movies.map((movie, index) => (
-                <MovieCard key={index} movie={movie} />
+                <MovieCard key={index} movie={movie} isLoading={isLoading} />
               ))
             }
           </div>

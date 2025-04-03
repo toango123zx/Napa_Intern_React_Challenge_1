@@ -20,7 +20,18 @@ export const getMovie = async (id: string): Promise<TMovieDetail> => {
             plot: 'full'
         }
     })
-    console.log(`🚀 ~ movie.api.ts:22 ~ getMovie ~ response:`, response)
 
     return response.data
+}
+
+
+export const getMoviesByTitle = async (title: string): Promise<TMovie[]> => {
+    const response = await axios.get(DOMAIN, {
+        params: {
+            s: title,
+            plot: 'full',
+        }
+    })
+
+    return response.data.Search
 }
